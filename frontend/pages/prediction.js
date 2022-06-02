@@ -15,6 +15,7 @@ function Prediction() {
 	const [diabetic, setDiabetic] = useState(0);
 
 	const [predVal, setPredVal] = useState();
+	const [frsVal, setFrsVal] = useState();
 
 	async function handleSubmit(e) {
 		e.preventDefault();
@@ -39,8 +40,10 @@ function Prediction() {
 		});
 
 		res = await res.json();
-		console.log(res.data);
-		setPredVal(res.data);
+		console.log(res.pred);
+		console.log(res.frs);
+		setPredVal(res.pred);
+		setFrsVal(res.frs);
 	}
 
 	return (
@@ -56,6 +59,8 @@ function Prediction() {
 						Personal Profile
 					</p>
 					<Input
+						type="name"
+						width="full"
 						placeholder="Full Name"
 						name="name"
 						onChange={(e) => {
@@ -70,7 +75,7 @@ function Prediction() {
 					{/* SELECT SEX */}
 					<div className="mb-4">
 						<label
-							for="sex"
+							// for="sex"
 							className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400"
 						>
 							Sex
@@ -91,6 +96,10 @@ function Prediction() {
 
 					<div className="flex sm:flex-row flex-col sm:space-x-10">
 						<Input
+							type="number"
+							width="32"
+							min="20"
+							max="100"
 							placeholder="Age"
 							name="age"
 							onChange={(e) => {
@@ -99,40 +108,60 @@ function Prediction() {
 						/>
 
 						<Input
-							placeholder="Blood Pressure (SBP)"
+							type="number"
+							width="32"
+							min="100"
+							max="175"
+							placeholder="SBP (mmHg)"
 							onChange={(e) => {
 								setBP(e.target.value);
 							}}
 						/>
 
 						<Input
-							placeholder="Cholestrol"
+							type="number"
+							width="32"
+							min="100"
+							max="400"
+							placeholder="Cholestrol (mg/dL)"
 							onChange={(e) => {
 								setChol(e.target.value);
 							}}
 						/>
 					</div>
 					<Input
-						placeholder="HDL Cholestrol"
+						type="number"
+						width="full"
+						min="10"
+						max="100"
+						placeholder="HDL Cholestrol (mg/dL)"
 						onChange={(e) => {
 							setHdlChol(e.target.value);
 						}}
 					/>
 
 					<Input
-						placeholder="Waist Circumference"
+						type="number"
+						width="full"
+						placeholder="Waist Circumference (cm)"
 						onChange={(e) => {
 							setWCirc(e.target.value);
 						}}
 					/>
 					<Input
+						type="number"
+						width="full"
+						min="5"
+						max="70"
 						placeholder="BMI"
 						onChange={(e) => {
 							setBMI(e.target.value);
 						}}
 					/>
 					<Input
-						placeholder="Neutral Fat"
+						type="number"
+						width="full"
+						placeholder="Neutral Fat (mg/dL)"
 						onChange={(e) => {
 							setNFat(e.target.value);
 						}}
@@ -140,7 +169,7 @@ function Prediction() {
 
 					<div className="mb-6">
 						<label
-							for="countries"
+							// for="countries"
 							className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400"
 						>
 							Diabetic
@@ -175,7 +204,7 @@ function Prediction() {
 							? "border-green-500"
 							: parseFloat(predVal * 100).toFixed(2) > 50 &&
 							  parseFloat(predVal * 100).toFixed(2) <= 75
-							? "border-orange-600"
+							? "border-orange-400"
 							: "border-red-600"
 					}`}
 				>
@@ -186,18 +215,22 @@ function Prediction() {
 
 					{parseFloat(predVal * 100).toFixed(2) <= 50 ? (
 						<p className="font-normal text-gray-700 dark:text-gray-400">
-							Normal
+							Normal Condition
 						</p>
 					) : parseFloat(predVal * 100).toFixed(2) > 50 &&
 					  parseFloat(predVal * 100).toFixed(2) <= 75 ? (
 						<p className="font-normal text-gray-700 dark:text-gray-400">
-							Slight Risk
+							Slight Risk Condition
 						</p>
 					) : (
 						<p className="font-normal text-gray-700 dark:text-gray-400">
-							High Risk
+							High Risk Condition
 						</p>
 					)}
+
+					<h5 className="mt-5 text-xl font-bold tracking-tight text-gray-900">
+						Framingham Risk Score (FRS): {frsVal}
+					</h5>
 				</div>
 			) : (
 				<div className="flex flex-col ml-28 p-4 max-w-sm h-full rounded-lg border border-gray-200 shadow-md">

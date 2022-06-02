@@ -271,7 +271,7 @@ def api_post():
         print(frs)
         # return op value to frontend
         finalop = str(finalop)
-        return jsonify(data=finalop)
+        return jsonify(pred=finalop, frs=frs)
 
 
 if __name__ == "__main__":

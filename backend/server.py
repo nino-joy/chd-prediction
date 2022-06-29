@@ -265,7 +265,7 @@ def api_post():
             if finalop >= 0.00 and finalop < 0.30:
                 finalop = finalop + 0.50
             elif finalop >= 0.30 and finalop <= 0.50:
-                finalop = finalop + 0.40
+                finalop = finalop + 0.30
 
         print(finalop)
         print(frs)

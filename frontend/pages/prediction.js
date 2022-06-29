@@ -49,7 +49,7 @@ function Prediction() {
 	return (
 		<div className="flex justify-center items-center sm:h-full">
 			{/* FORM COMPONENT */}
-			<div className="flex px-5 sm:my-14 my-5 sm:py-5 bg-white rounded-lg sm:shadow-xl sm:max-w-xl sm:border">
+			<div className="flex px-5 sm:my-14 my-5 sm:py-5 bg-white rounded-lg sm:shadow-xl sm:max-w-xl sm:border-2">
 				<form action="" method="POST" onSubmit={handleSubmit}>
 					<p className="mb-5 font-bold text-gray-800 text-2xl">
 						Please fill in the details
@@ -94,7 +94,7 @@ function Prediction() {
 						</select>
 					</div>
 
-					<div className="flex sm:flex-row flex-col sm:space-x-10">
+					<div className="flex sm:flex-row flex-col sm:space-x-14 items-center">
 						<Input
 							type="number"
 							width="32"
